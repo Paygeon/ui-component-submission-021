@@ -31,7 +31,6 @@ just fetch everything and make another folder with the parameter and just direct
 complete the cms page in public
 
 
-//use https://v0.dev/ 
 
 handle md and ts upload (use matter for md when uploading) 
 check if ts can be rendered as a string instead of storing as a file in the backend (hassle)
@@ -127,7 +126,7 @@ const {CATEGORIES}  = await getBusinessConfig
 
 
 get the tyescript to run off a string
-mabye build a auth system
+mabye build a auth system if time
 check where other images are used
 
 completed for the most part everything
