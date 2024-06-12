@@ -1,4 +1,3 @@
-"use client";
 // Import Types
 import { SocialFollowLinkObject } from '@/types';
 // Import External Packages

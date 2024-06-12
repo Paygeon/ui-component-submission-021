@@ -19,6 +19,7 @@ import {
 // Import Functions & Actions & Hooks & State
 import { capitalize } from '@/lib/utils';
 // Import Data
+
 import { CATEGORIES, CATEGORIES_DESC, COMPANY_NAME } from '@/constants';
 // Import Assets & Icons
 

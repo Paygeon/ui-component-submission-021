@@ -1,4 +1,3 @@
-"use client";
 // Import Types
 import { Feature } from '@/types';
 // Import External Packages

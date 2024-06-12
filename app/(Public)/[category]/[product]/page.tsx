@@ -36,8 +36,19 @@ import {
 	CREATOR_LINK,
 	SOCIAL_FOLLOW_LINKS,
 } from '@/constants';
+import { useDownloadTsxFile } from '@/lib/server-utils';
+import { use } from 'react';
+import { TECH_STACK } from '@/app/_constants/techstack';
 
 // Import Assets & Icons
+
+
+
+
+
+
+
+
 
 type ProductPageProps = {
 	params: { product: string; category: Category };
@@ -130,6 +141,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 	if (!doesProductExist(params.category, params.product)) {
 		notFound();
 	}
+	
+
+	
 
 	const { meta, content, error } = await getProductMetaAndMDXContent(
 		params.category,
@@ -139,6 +153,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 	if (error) {
 		notFound();
 	}
+
+	
+	
+console.log("product techstack is",meta.techStack);
+console.log("available tech stack is",TECH_STACK);
+	
 
 	return (
 		<SectionOuterContainer className="max-w-5xl">

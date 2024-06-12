@@ -4,9 +4,8 @@ const LogoSchema = new Schema({
     theme: {
         type: String,
         required: true,
-        unique: true,
     },
-    svg: {
+    img: {
         type : String,
         required: true,
     },

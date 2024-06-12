@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 // Import Components
 // Import Functions & Actions & Hooks & State
 // Import Data
+
 import {
 	COMPANY_META_DESCRIPTION,
 	COMPANY_META_TITLE,
@@ -15,6 +16,7 @@ import {
 	SOCIAL_FOLLOW_LINKS,
 } from '@/constants';
 // Import Assets & Icons
+
 
 export const METADATA_FULL: Metadata = {
 	title: COMPANY_META_TITLE,

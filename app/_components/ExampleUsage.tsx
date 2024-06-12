@@ -1,4 +1,3 @@
-"use client";	
 // Import Types
 import { ProductMetaExample } from '@/types';
 // Import External Packages

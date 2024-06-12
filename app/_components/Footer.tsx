@@ -1,4 +1,5 @@
-"use client";
+'use client';
+import {useEffect,useState}from 'react';
 // Import Types
 import { LinkListItem } from '@/types';
 // Import External Packages
@@ -10,7 +11,7 @@ import ExternalLink from '@/ui/ExternalLink';
 // Import Functions & Actions & Hooks & State
 import { capitalize, cn } from '@/lib/utils';
 // Import Data
-import logoWhite from '@/public/logos/logo_for_dark.svg';
+import { ImagesFromAPI } from '../_constants/imagesAPI';
 import {
 	CREATOR_LINK,
 	FOOTER_DISCLAIMERS,
@@ -150,6 +151,25 @@ function InternalLinkBar({
  * @returns The rendered footer component.
  */
 export default function Footer() {
+	const [logoWhite, setLogoWhite] = useState([]);
+
+	useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const images = await ImagesFromAPI();
+                setLogoWhite(images["dark"]);
+                console.log(images["dark"]);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchImages();
+    }, []);
+
+		
+
+	
 	return (
 		<footer
 			className="relative w-full bg-black pt-10 dark:border-t dark:border-white z-20"
@@ -164,6 +184,8 @@ export default function Footer() {
 						<Image
 							className="h-auto w-48"
 							src={logoWhite}
+							width = "100"
+							height = "100"
 							alt="DroppedHub Logo White on transparent background"
 						/>
 						<p className="text-sm leading-6 text-gray-300">{FOOTER_SLOGAN}</p>

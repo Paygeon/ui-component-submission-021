@@ -1,4 +1,3 @@
-"use client";
 // Import Types
 // Import External Packages
 // Import Components

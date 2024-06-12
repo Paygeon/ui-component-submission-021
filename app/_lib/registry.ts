@@ -7,11 +7,11 @@ import { Category, ProductMeta } from '@/types';
 // Import Components
 // Import Functions & Actions & Hooks & State
 // Import Data
-import registry from '@/registry';
+import registry from '@/registry'
 // Import Assets & Icons
 
-export type RegistryKey = keyof typeof registry;
 
+export type RegistryKey = keyof typeof registry; 
 /**
  * Retrieves an array of all product slugs within a given category.
  *
@@ -21,9 +21,14 @@ export type RegistryKey = keyof typeof registry;
 export const getAllProductSlugsWithinCategory = (
 	category: Category
 ): string[] => {
-	return registry[category].map((product) => product.slug);
+	let output :string[] = []
+	for (const key in registry[category]) {
+		output.push(registry[category][key].slug)
+	}
+	console.log(output)
+	return output
+	
 };
-
 /**
  * Checks if a product exists in the registry.
  * @param categorySlug - The category slug.

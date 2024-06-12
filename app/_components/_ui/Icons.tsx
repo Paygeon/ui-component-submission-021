@@ -1,5 +1,5 @@
 // Purpose: This file is used to define the icons used in the project.
-import React from 'react';
+
 // Import Types
 import { LucideProps } from 'lucide-react';
 // Import External Packages

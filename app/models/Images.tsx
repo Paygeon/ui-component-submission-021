@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
 const imageSchema = new mongoose.Schema({
-    dimension : {
+    type: {
         type: String,
         required: true
     },
     img : {
-        imgData: Buffer,
-        contentType: String
+        type: String,
+        required: true
     }
 });
  const Image = mongoose.models.Image || mongoose.model('Image', imageSchema);

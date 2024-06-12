@@ -48,7 +48,9 @@ export default function CodeBlock({
 		}
 	}, [thresholdHeight]);
 
-	const codeString = children.props.children.props.children.trimEnd();
+	const codeString =
+  children.props?.children?.props?.children?.trimEnd() || '';
+
 
 	return (
 		<div className="relative mt-2">

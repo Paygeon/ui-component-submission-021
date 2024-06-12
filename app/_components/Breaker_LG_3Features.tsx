@@ -27,15 +27,20 @@ type Feature = {
 export default function Breaker_LG_3Features({
 	features,
 	className,
-	title = 'Buttons so beautiful, you will want to click them all day long.',
-	subTitle = 'We wrote a poem about our buttons. Seriously. ',
-	description = 'Some Actual Description Here.',
+	title,
+	subTitle ,
+	description,
+	contentSubtext,
+	content,
+
 }: {
 	features: Feature[];
 	className?: string;
 	title?: string;
 	subTitle?: string;
 	description?: string;
+	contentSubtext?: string;
+	content?: string;
 }) {
 	return (
 		<div
@@ -53,24 +58,10 @@ export default function Breaker_LG_3Features({
 						{subTitle}
 					</p>
 					<p className="text-sm italic mt-2 max-w-sm mx-auto">
-						Okay, it was ChatGPT... And we deleted like 8 verses because it went
-						nuts. But hey its buttons!
+						{contentSubtext}
 					</p>
 					<p className="mt-6 text-lg leading-8 text-balance">
-						In the realm of screens where clicks reside, <br />A button&apos;s
-						born, with pride it thrives. <br />
-						Need a touch of simplicity? A button lies, <br />
-						Crafted neat, under digital skies.
-						<br />
-						<br /> Should beauty marry function, you ask? <br />
-						We have a button, up to the task. <br />
-						Sleek and sturdy, a joy to press,
-						<br /> In a world of clutter, it&apos;s a breath of fresh. <br />
-						<br />
-						So here&apos;s our button, made with care,
-						<br /> Looks good, works well, beyond compare. <br />
-						Easy, free, open, with love&apos;s embrace, <br />A tiny marvel, in
-						the digital space.
+						{content}
 					</p>
 				</div>
 				<div className="mx-auto mt-12">

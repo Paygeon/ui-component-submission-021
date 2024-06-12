@@ -1,8 +1,8 @@
-
 'use client';
+
 // Import Types
 // Import External Packages
-import {Disclosure}  from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 // Import Components
@@ -12,6 +12,8 @@ import { Badge } from '@/ui/Badge';
 import { COMPANY_NAME, CATEGORIES_DESC, NAVBAR_ADD_LINKS } from '@/constants';
 // Import Assets & Icons
 import { MenuIcon, MoonIcon, XIcon, SunIcon } from 'lucide-react';
+import { useEffect ,useState} from 'react';
+import { ImagesFromAPI } from '../_constants/imagesAPI';
 
 /**
  * Renders a mode toggle button that allows the user to switch between light and dark mode.
@@ -55,6 +57,21 @@ function ModeToggle() {
 }
 
 export default function Navbar() {
+
+	const [logoWhite, setLogoWhite] = useState('');
+	const [logoDark, setLogoDark] = useState('');
+
+	useEffect(() => {
+		const fetchImages = async () => {
+			const images = await ImagesFromAPI();
+			setLogoWhite(images.light);
+			setLogoDark(images.dark);
+		};
+		fetchImages();
+	}, []);
+
+
+
 	return (
 		<Disclosure
 			as="nav"
@@ -81,7 +98,7 @@ export default function Navbar() {
 							<div className="flex flex-shrink-0 items-center">
 								<Link href="/">
 									<Image
-										src="/logos/logo_for_light.svg"
+										src={logoWhite}
 										alt={`${COMPANY_NAME} Logo Light Mode`}
 										width={150}
 										height={100}
@@ -89,7 +106,7 @@ export default function Navbar() {
 										priority
 									/>
 									<Image
-										src="/logos/logo_for_dark.svg"
+										src={logoDark}
 										alt={`${COMPANY_NAME} Logo Dark Mode`}
 										width={150}
 										height={100}

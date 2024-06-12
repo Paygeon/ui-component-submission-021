@@ -6,8 +6,8 @@ const iconSchema = new mongoose.Schema({
         required: true
     },
     img : {
-        imgData: Buffer,
-        contentType: String
+        type : String,
+        required: true
     }
 });
 

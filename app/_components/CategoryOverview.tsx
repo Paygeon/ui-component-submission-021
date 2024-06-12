@@ -27,6 +27,7 @@ import { capitalize, cn } from '@/lib/utils';
 // Import Data
 import { getFilteredProducts } from '@/lib/registry';
 import { CATEGORIES_DESC } from '@/constants';
+import axios from 'axios';
 // Import Assets & Icons
 
 /**
@@ -57,7 +58,7 @@ function ComingSoonPlaceholder() {
 }
 
 /**
- * Renders the category overview component.
+ * Renders the category overview component.ab
  *
  * @param categoryName - The name of the category.
  * @param title - The title of the category overview. Defaults to `Browse ${categoryName}`.
@@ -107,6 +108,10 @@ export default function CategoryOverview({
 		maxCols - productsInCategory.length,
 		1
 	);
+
+
+
+
 
 	return (
 		<SubSectionOuterContainer

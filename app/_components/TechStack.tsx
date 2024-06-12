@@ -1,4 +1,3 @@
-"use client";
 // Import Types
 import { TechStackObject } from '@/types';
 // Import External Packages
@@ -14,6 +13,7 @@ import { TECH_STACK } from '../_constants/techstack';
 // Import Functions & Actions & Hooks & State
 // Import Data
 // Import Assets & Icons
+
 
 function TechStackCard({ techStack }: { techStack: TechStackObject }) {
 	return (
@@ -64,6 +64,8 @@ export default function TechStackSection({
 	techStack: string[];
 	className?: string;
 }) {
+
+	
 	const usedTechStackObjects = techStack
 		? TECH_STACK.filter((stackObject) =>
 				techStack.includes(stackObject.techStackName)

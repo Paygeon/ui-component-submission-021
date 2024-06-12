@@ -1,6 +1,5 @@
-"use client";
 // Import Types
-import { ComponentType } from 'react';
+import { ComponentType, Suspense } from 'react';
 // Import External Packages
 import dynamic from 'next/dynamic';
 // Import Components
@@ -14,6 +13,7 @@ import {
 import { backgroundPattern } from '@/lib/utils';
 // Import Data
 // Import Assets & Icons
+import axios from 'axios'
 
 /**
  * Imports a component dynamically based on the provided category and componentSlug from the app/_products folder .
@@ -27,7 +27,7 @@ const importComponentByComponentSlug = (
 ): ComponentType<any> => {
 	return dynamic(
 		() =>
-			import(`app/_products/${category}/${componentSlug}/${componentSlug}.tsx`)
+			import(`@/app/typescripts/${category}-${componentSlug}.tsx`)
 				.then((mod) => mod.default as ComponentType<any>)
 				.catch(() => {
 					const NotFoundComponent: ComponentType<any> = () => (
@@ -53,6 +53,7 @@ type CodeBlockProps = {
 	description?: string;
 	componentSlug: string;
 	category: string;
+	typescriptFlag: boolean;
 };
 
 /**
@@ -71,7 +72,11 @@ export default function PreviewBox({
 	description = 'This is how the code looks like in action.',
 	componentSlug,
 	category,
+	typescriptFlag,
 }: CodeBlockProps) {
+
+	
+	
 	const DynamicComponent = importComponentByComponentSlug(
 		category,
 		componentSlug

@@ -6,6 +6,7 @@ import { Category, ProductMeta } from '@/types';
 import matter from 'gray-matter';
 import path from 'path';
 import fs from 'fs';
+import axios from 'axios';
 // Import Components
 // Import Functions & Actions & Hooks & State
 // Import Data
@@ -17,35 +18,62 @@ import fs from 'fs';
  * @param productSlug - The slug of the product.
  * @returns An object containing the product metadata, MDX content, and an error flag.
  */
+
 export async function getProductMetaAndMDXContent(
-	categorySlug: Category,
-	productSlug: string
+    categorySlug: string,
+    productSlug: string
 ) {
-	const blogDir = '/app/_products';
-	const currentPath = path.join(
-		process.cwd(),
-		blogDir,
-		categorySlug,
-		`${productSlug}/${productSlug}.docs.mdx`
-	);
-	if (!fs.existsSync(currentPath))
-		return { meta: {} as ProductMeta, content: '', error: true };
-	const fileContent = fs.readFileSync(
-		path.join(
-			process.cwd(),
-			blogDir,
-			categorySlug,
-			`${productSlug}/${productSlug}.docs.mdx`
-		),
-		'utf-8'
-	);
-	const { data: frontMatter, content } = matter(fileContent);
-	return {
-		meta: frontMatter as ProductMeta,
-		content,
-		error: false,
-	};
+    try {
+        // Function to fetch front matter (metadata) from the server
+        const fetchFrontMatter = async () => {
+            try {
+                const res = await axios.get(
+                    `http://localhost:3000/api/products/frontmatter/${categorySlug}/${productSlug}`
+                );
+               
+                return res.data;
+            } catch (error) {
+                console.error('Error fetching product metadata:', error);
+                return { frontmatter: {} };
+            }
+        };
+
+        // Function to fetch MDX content from the server
+        const fetchMDXContent = async () => {
+            try {
+                const res = await axios.get(
+                    `http://localhost:3000/api/products/markdown/${categorySlug}/${productSlug}`
+                );
+                
+                return res.data;
+            } catch (error) {
+                console.error('Error fetching product content:', error);
+                return { markdownContent: '' };
+            }
+        };
+
+        // Use Promise.all to fetch both front matter and MDX content concurrently
+        const [frontMatterAPI, contentAPI] = await Promise.all([
+            fetchFrontMatter(),
+            fetchMDXContent(),
+        ]);
+
+      
+        // Extract frontmatter and content
+        const { frontmatter } = frontMatterAPI;
+        const { markdownContent: content } = contentAPI;
+
+        return {
+            meta: frontmatter as ProductMeta,
+            content,
+            error: false,
+        };
+    } catch (error) {
+        console.error('Error fetching product metadata and content:', error);
+        return { meta: {} as ProductMeta, content: '', error: true };
+    }
 }
+
 
 /**
  * Retrieves the paths of all the content files with the '.mdx' extension in a directory and its subdirectories - e.g. for static data like the sitemap.
@@ -80,4 +108,30 @@ export const getDocsContentPaths = (
 	});
 
 	return paths;
+};
+
+
+
+export async function  useDownloadTsxFile (category: string, componentSlug: string){
+    const fetchAndWriteTsxFile = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/products/typescript/${category}/${componentSlug}`
+        );
+        const { message, filePath } = response.data;
+
+        if (message === 'File created successfully') {
+            
+          console.log(`TSX file written to ${filePath}`);
+          return(true)
+        } else {
+          console.error('Error writing TSX file:', response.data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching and writing TSX file:', error);
+        return(false)
+      }
+    };
+
+    fetchAndWriteTsxFile();
 };

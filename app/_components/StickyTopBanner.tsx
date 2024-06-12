@@ -1,4 +1,3 @@
-"use client";
 // Import Types
 // Import External Packages
 import Link from 'next/link';
@@ -15,16 +14,16 @@ export default function StickyTopBanner() {
 	return (
 		<div className="w-full bg-neutral-200 text-center text-black space-y-2 py-2 px-12">
 			<p className="text-center leading-6 tracking-wide">
-				This is an example project build in top of the boilerplate template{' '}
+				Customizable template with inbuilt CMS system by Madhav Murali{' '}
 				<Link
-					href="https://boilerplatehq.com/templates/ui-component-library"
+					href="https://madhav-murali-nitc.github.io/github-portfolio/"
 					className="underline"
 				>
-					<span className="font-semibold">Ui Component Library</span>
+					<span className="font-semibold">(Portfolio)</span>
 				</Link>{' '}
-				by{' '}
-				<Link href="https://boilerplatehq.com" className="underline">
-					BoilerplateHQ
+				{' '}
+				<Link href="https://madhav-murali-nitc.github.io/github-portfolio/" className="underline">
+					
 				</Link>
 				.
 			</p>

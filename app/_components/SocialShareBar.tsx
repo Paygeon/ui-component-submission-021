@@ -1,4 +1,3 @@
-"use client";
 // Import Types
 import { SocialShareLinkObject } from '@/types';
 // Import External Packages
@@ -81,7 +80,7 @@ export default function SocialShareBar({
 							</>
 						) : (
 							<span className="flex items-center">
-								Share on <link.Icon />
+								Share on {link.channelName}
 							</span>
 						)}
 					</ExternalLink>
