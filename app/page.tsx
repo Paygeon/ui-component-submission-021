@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col mx-auto">
-      <Suspense fallback={<Loading />}>
+      
       <Hero  />
 
         {isLoading ? (
@@ -57,7 +57,7 @@ export default function Home() {
             <NewsletterBox_BeeHiiv />
           </>
         )}
-      </Suspense>
+   
     </div>
   );
 }
