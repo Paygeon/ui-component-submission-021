@@ -52,7 +52,7 @@ export default function SecretKeysForm() {
   }
 
   return (
-    <Card className="w-full max-w-xl">
+    <Card>
       <CardHeader>
         <CardTitle>API Key Settings</CardTitle>
         <CardDescription>Update your Umami.is and BeeHivv API keys. Leave empty if no key is wanted.</CardDescription>

@@ -62,7 +62,7 @@ export default function ImageUpload(props: any) {
   };
 
   return (
-    <Card>
+    <Card className="max-w-50">
       <CardHeader>
         <CardTitle>{props.heading}</CardTitle>
       </CardHeader>

@@ -22,6 +22,7 @@ const updateEnvFile = ({ umamiKey, beehiivKey }) => {
     .concat([
       `NEXT_PUBLIC_BEEHIIV_EMBED_URL='${beehiivKey}'`,
       `NEXT_PUBLIC_UMAMI_ID='${umamiKey}'`
+      
     ])
     .join('\n');
 

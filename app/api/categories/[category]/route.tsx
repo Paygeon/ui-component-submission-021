@@ -42,7 +42,7 @@ export const GET = async (
       metaDescription: product.metaDescription,
       metaTitle: product.metaTitle,
       license: product.license,
-      productLine: category.slug
+      productLine: product.categorySlug
     }));
 
     return NextResponse.json(frontmatters);

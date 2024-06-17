@@ -2,7 +2,7 @@
 
 // Import Types
 // Import External Packages
-import { Disclosure } from '@headlessui/react';
+import { Button, Disclosure } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 // Import Components
@@ -14,6 +14,8 @@ import { COMPANY_NAME, CATEGORIES_DESC, NAVBAR_ADD_LINKS } from '@/constants';
 import { MenuIcon, MoonIcon, XIcon, SunIcon } from 'lucide-react';
 import { useEffect ,useState} from 'react';
 import { ImagesFromAPI } from '../_constants/imagesAPI';
+import {useKindeBrowserClient,LogoutLink} from '@kinde-oss/kinde-auth-nextjs';
+import Loading from '../loading';
 
 /**
  * Renders a mode toggle button that allows the user to switch between light and dark mode.
@@ -58,19 +60,36 @@ function ModeToggle() {
 
 export default function Navbar() {
 
+
+	const { user, isAuthenticated, getPermission ,isLoading} = useKindeBrowserClient();
+
+
 	const [logoWhite, setLogoWhite] = useState('');
 	const [logoDark, setLogoDark] = useState('');
-
+	const [navbarAddLinks, setNavbarAddLinks] = useState(NAVBAR_ADD_LINKS);
 	useEffect(() => {
+
 		const fetchImages = async () => {
 			const images = await ImagesFromAPI();
+			//@ts-ignore
 			setLogoWhite(images.light);
+			//@ts-ignore
 			setLogoDark(images.dark);
+			if (isAuthenticated) {
+                const cmsPermission = await getPermission("access:cms");
+                if (!cmsPermission.isGranted) {
+                    setNavbarAddLinks(navbarAddLinks.filter(link => link.name !== "Cms"));
+                }
+            } 
 		};
 		fetchImages();
-	}, []);
+	
 
+	}, [isAuthenticated]);
 
+	if (isLoading) {
+		return (<Loading />)
+	}
 
 	return (
 		<Disclosure
@@ -96,7 +115,7 @@ export default function Navbar() {
 							{/* Desktop Nav */}
 							{/* Logo */}
 							<div className="flex flex-shrink-0 items-center">
-								<Link href="/">
+								<Link href="/dashboard">
 									<Image
 										src={logoWhite}
 										alt={`${COMPANY_NAME} Logo Light Mode`}
@@ -132,19 +151,12 @@ export default function Navbar() {
 
 												<span className="absolute inset-0" />
 											</Link>
-											{category.badge && (
-												<Badge
-													variant="tinyPrimary"
-													className="block h-fit -mt-2 mx-1"
-												>
-													{category.badge}
-												</Badge>
-											)}
+											
 										</div>
 									</div>
 								))}
 
-								{NAVBAR_ADD_LINKS.map((link) => (
+								{navbarAddLinks.map((link) => (
 									<div
 										key={link.name}
 										className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6"
@@ -165,7 +177,15 @@ export default function Navbar() {
 							<div className="flex items-center justify-center lg:max-w-fit whitespace-nowrap space-x-2 ">
 								<div className="pointer-events-auto border-gray-500 lg:w-40 text-center">
 									<ModeToggle />
+									
+									{ user ? <p className="text-gray-900 dark:text-white text-sm font-semibold">{user.given_name}</p> : null}
 								</div>
+								<LogoutLink>
+								<Button
+									variant="ghost"
+									className="pointer-events-auto"
+								>Logout</Button>
+								</LogoutLink>
 							</div>
 						</div>
 					</div>

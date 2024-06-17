@@ -236,7 +236,7 @@ export default function BusinessDetailForm() {
   }
 
   return (
-    <Card className="max-w-fit">
+    <Card>
       <CardHeader>
         <CardTitle>Business Details</CardTitle>
         <CardDescription>Fill out the form to provide comprehensive details about your business.</CardDescription>

@@ -26,6 +26,7 @@ type SocialLinksProps = {
  * @returns The rendered social follow bar component.
  */
 export default function SocialFollowBar({
+	//@ts-ignore
 	links = SOCIAL_FOLLOW_LINKS,
 	direction = 'horizontal',
 	size = 'sm',

@@ -37,6 +37,7 @@ export default function LinksToProductsBar({
 	params,
 	className,
 }: CategoryPageProps) {
+	//@ts-ignore
 	const productsInCategory = getFilteredProducts(params.category);
 	const tagRegistry = createTagsRegistry(params.category);
 	const searchParams = useSearchParams();

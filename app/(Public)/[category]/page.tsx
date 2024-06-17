@@ -77,6 +77,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 						</Suspense>
 						<Suspense>
 							<CategoryOverview
+							//@ts-ignore
 								categoryName={params.category}
 								categoryNavigation={false}
 								className="py-2"

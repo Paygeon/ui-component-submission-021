@@ -36,6 +36,7 @@ type SocialLinksProps = {
 export default function SocialShareBar({
 	currentSiteLink,
 	title = 'Share',
+	//@ts-ignore
 	links = SOCIAL_SHARE_LINKS,
 	direction = 'horizontal',
 	size = 'sm',

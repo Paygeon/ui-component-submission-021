@@ -59,7 +59,7 @@ export default function CategoryUpload() {
   use
 
   return (
-    <Card className="w-full max-w-md">
+    <Card>
       <form onSubmit={handleSubmit}>
         <CardHeader>
           <CardTitle>Create New Component</CardTitle>

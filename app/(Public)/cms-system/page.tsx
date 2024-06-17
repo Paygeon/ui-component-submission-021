@@ -3,6 +3,7 @@
 // Import Types
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Loading from '@/app/loading';
 // Import External Packages
 // Import Components
 import {
@@ -21,6 +22,7 @@ import CategoryUpload from '@/app/_components/_ui/CategoryUpload';
 import DeleteItem from '@/app/_components/_ui/DeleteItem';
 import { useEffect } from 'react';
 import axios from 'axios';
+import router from 'next/router';
 
 import ImageUpload  from '@/app/_components/_ui/ImageUpload';
 import {
@@ -34,6 +36,8 @@ import {
 import BusinessDetailForm from '@/app/_components/_ui/BusinessDetailForm';
 import WebsiteEditor from '@/app/_components/_ui/WebsiteEditor';
 import SecretKeysForm from '@/app/_components/_ui/SecretKeyForm';
+import { useKindeBrowserClient} from '@kinde-oss/kinde-auth-nextjs';
+import React from 'react';
 
 
 
@@ -43,8 +47,8 @@ function DarkandLightModeLogoUpload() {
 		<SubSectionOuterContainer className="max-w-3xl py-0">
 			<h2 className="text-black dark:text-zinc-200">Logo Update</h2>
 			<SubSectionInnerContainer className="items-start py-0 flex-row justify-between">
-				<ImageUpload class='m-8' heading="Light Mode Logo (dark image)" apiKey="/logos/dark"  />
-				<ImageUpload class='m-8' heading="Dark Mode Image (light image)" apiKey="/logos/light"  />
+				<ImageUpload class='m-8' heading="Dark Mode Logo (light image)" apiKey="/logos/dark"  />
+				<ImageUpload class='m-8' heading="Light Mode Image (dark image)" apiKey="/logos/light"  />
 			</SubSectionInnerContainer>
 		</SubSectionOuterContainer>
 	);
@@ -89,13 +93,36 @@ function OpenGraphImageUpload() {
 
 
 export default function CMSPage() {
+	const [loading,setLoading] = React.useState(true);
 
+	const {user,isAuthenticated, getPermission,isLoading} = useKindeBrowserClient();
 	useEffect(() => {
+		const fetchData = async () => {
 		const res =  axios.get('http://localhost:3000/api/populateConstants');
+		if (isAuthenticated) {
+			const requiredPermission = getPermission("access:cms");
+			if (!requiredPermission.isGranted) {
+				window.location.href = '/dashboard';
+			}
+		} else {
+			window.location.href = '/dashboard';
+		}
+
+	
+	
+		
+	}
+	fetchData();
+
 	}, []);
+	
+	if (isLoading) {
+		return (<Loading />)
+	}
 	
 	
 	return (
+		
 		<SectionOuterContainer >
             <Breadcrumps />
 			<SectionTitle>CMS Page</SectionTitle>

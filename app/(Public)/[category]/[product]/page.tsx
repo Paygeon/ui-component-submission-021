@@ -138,6 +138,7 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
+	//@ts-ignore
 	if (!doesProductExist(params.category, params.product)) {
 		notFound();
 	}
@@ -173,6 +174,7 @@ console.log("available tech stack is",TECH_STACK);
 			<QuickLinksBar productMeta={meta} />
 
 			{meta.hasComponentCode && (
+				//@ts-ignore
 				<PreviewBox category={meta.category} componentSlug={meta.slug} />
 			)}
 			<StepByStepGuide

@@ -259,7 +259,7 @@ export default function ProductUpload({ product, handleProductChange }) {
         <CarouselItem>
           <Card>
             <CardHeader>
-              <CardTitle class = 'dark:text-white' >Create New Product</CardTitle>
+              <CardTitle className = 'dark:text-white' >Create New Product</CardTitle>
               <CardDescription>Fill out the form to create a new product.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -290,7 +290,7 @@ export default function ProductUpload({ product, handleProductChange }) {
                 <Input
                   id="slug"
                   value={product.slug}
-                  onChange={(e) => {product.catagory && product.slug && registry[category] == e.target.value ? alert("This Slug already exits in the category!")  : handleProductChange({ ...product, slug: e.target.value })}}
+                  onChange={(e) => {product.catagory && product.slug && registry[product.category] == e.target.value ? alert("This Slug already exits in the category!")  : handleProductChange({ ...product, slug: e.target.value })}}
                   placeholder="Enter slug"
                 />
               </div>
@@ -348,11 +348,14 @@ export default function ProductUpload({ product, handleProductChange }) {
                 <Label>Tech Stack</Label>
                 <div className="flex flex-wrap gap-2">
                   {techstack.map((tech, index) => (
-                    <Button
+
+                    product.techStack.includes(tech.name) ? <Button
                       key={index}
-                      variant={product.techStack.includes(tech.name) ? "outline" : "solid"}
+                      variant="secondary"
                       onClick={() => handleTechStackChange(tech.name)}
                     >
+                      {tech.name}
+                    </Button> : <Button key={index} variant="outline" onClick={() => handleTechStackChange(tech.name)}>
                       {tech.name}
                     </Button>
                   ))}

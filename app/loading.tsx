@@ -8,7 +8,7 @@ export default function Loading() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false); // Hide the loading animation after 2 seconds
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer); // Cleanup on unmount
   }, []);

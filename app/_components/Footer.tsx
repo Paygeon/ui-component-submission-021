@@ -182,7 +182,9 @@ export default function Footer() {
 				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 					<div className="space-y-8 pr-12">
 						<Image
+						
 							className="h-auto w-48"
+							//@ts-ignore
 							src={logoWhite}
 							width = "100"
 							height = "100"

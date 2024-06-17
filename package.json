@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
+    "@kinde-oss/kinde-auth-nextjs": "^2.2.13",
     "@mapbox/rehype-prism": "^0.9.0",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/mdx": "^3.0.1",
